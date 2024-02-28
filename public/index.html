@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tooltip Manager Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+    <style>
+      /* Basic styling for the tooltip, adjust as needed */
+      .tooltip {
+        position: absolute;
+        border: 1px solid #333;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        padding: 10px;
+        color: #333;
+        font-size: 12px;
+        z-index: 1000;
+      }
+      .tooltip-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #333;
+        top: -5px;
+        left: 35%;
+      }
+      .tooltip-inner {
+        max-width: 200px;
+        padding: 5px 15px;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        background-color: #333;
+        border-radius: 4px;
+      }
+      .tooltipClose {
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="showTooltip" style="margin: 20px">Show Tooltip</button>
+
+    <div id="tooltipTarget" style="margin-top: 50px">
+      Hover over me for a tooltip!
+    </div>
+
+    <script>
+      require.config({
+        baseUrl:
+          "/Users/sayoojcyriac/tech-career/github/my-github/test-tooltip/public/scripts", // Adjust this path
+        paths: {
+          jquery:
+            "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min",
+          logger: "logger", // Path to the mock logger
+          "tooltip-manager": "tooltip-manager", // Assuming tooltip-manager.js is the name of your TooltipManager file
+        },
+      });
+
+      // Load and use the TooltipManager module
+      require(["jquery", "tooltip-manager"], function ($, TooltipManager) {
+        $(document).ready(function () {
+          $("#showTooltip").on("click", function (event) {
+            TooltipManager.showTooltip("This is a test tooltip!", event);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
